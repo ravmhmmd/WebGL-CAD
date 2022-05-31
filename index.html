@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line and Rectangle</title>
+</head>
+<body>
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        attribute vec4 v_post;
+        attribute vec4 v_color;
+        varying vec4 fColor;
+
+        void main() { 
+            gl_Position = v_post; 
+            fColor = v_color; 
+        }
+    </script>
+    
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+        varying vec4 fColor;
+
+        void main() {
+            gl_FragColor = fColor;
+        }
+    </script>
+
+    <button onclick="alert('Use the sliders to change the line and rectangle width.\n\nThe draw line, just click at two different places. For rectangle, hold your mouse.')">Help me!</button>
+    <form id="shape">
+        <input type="radio" id="radio" name="shape" value="Line" checked>Line
+        <input type="radio" id="radio" name="shape" value="Square">Square
+        <input type="radio" id="radio" name="shape" value="Rectangle">Rectangle
+        <input type="radio" id="radio" name="shape" value="Polygon">Polygon
+    </form>
+    <form id="mode">
+        <input type="radio" id="radio" name="mode" value="Create" checked>Create
+        <input type="radio" id="radio" name="mode" value="UpdateColor">Update Color
+        <input type="radio" id="radio" name="mode" value="moveX">Move X
+        <input type="radio" id="radio" name="mode" value="moveY">Move Y
+        <input type="radio" id="radio" name="mode" value="moveXY">Move XY
+    </form>
+    <input type="range" min="1" max="100" value="1" id="width">
+    <input type="color" id="color" />
+    <input type="number" id="nodePolygon" value="3" min="3"/>Node
+    <button id="save">Save</button>
+    <input type="file" id="load" accept=".json,application/json"/>
+    <button id="clear">Clear</button>
+    <canvas id="canvas"></canvas>
+    <script type="module" src="js/script.js"></script>
+    
+</body>
+</html>
